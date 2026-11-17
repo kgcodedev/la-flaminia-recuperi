@@ -30,16 +30,17 @@
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         .logo-area img {
-            height: 65px;
+            height: 50px;
             width: auto;
         }
         .logo-area h1 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #FFFFFF;
             letter-spacing: 0.5px;
+            line-height: 1.2;
         }
         @media (min-width: 768px) {
             .logo-area img {
@@ -52,23 +53,60 @@
                 padding: 15px 30px;
             }
         }
+
+        /* MENU DESKTOP E HAMBURGER MOBILE */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 15px;
+            gap: 20px;
         }
         nav ul li a {
             color: #FFFFFF;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: color 0.3s;
         }
         nav ul li a:hover {
             color: #38B000;
         }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: #38B000;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #141414;
+                border-bottom: 2px solid #38B000;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            nav.active {
+                max-height: 300px;
+            }
+            nav ul {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+                align-items: center;
+            }
+        }
         
-        /* HERO A TUTTO SCHERMO DA BORDO A BORDO */
+        /* HERO A TUTTO SCHERMO */
         .hero {
             width: 100%;
             height: 75vh;
@@ -106,7 +144,7 @@
             background-color: #2e8b00;
         }
 
-        /* Sezioni interne centrate con max-width */
+        /* Sezioni interne */
         section:not(.hero) {
             padding: 50px 20px;
             max-width: 1100px;
@@ -140,15 +178,14 @@
         
         .chi-siamo-logo {
             text-align: center;
-            background-color: transparent;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .chi-siamo-logo img {
-            max-width: 280px;
-            width: 100%;
+            max-width: 100%;
+            width: 280px;
             height: auto;
             object-fit: contain;
             border-radius: 12px;
@@ -185,13 +222,14 @@
 </head>
 <body>
 
-    <!-- HEADER CON LOGO E MENU -->
+    <!-- HEADER CON LOGO E MENU HAMBURGER -->
     <header>
         <div class="logo-area">
             <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="La Flaminia Recuperi Logo">
-            <h1>LA FLAMINIA RECUPERI S.R.L.</h1>
+            <h1>LA FLAMINIA<br>RECUPERI S.R.L.</h1>
         </div>
-        <nav>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Apri menu">☰</button>
+        <nav id="main-nav">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#chi-siamo">Chi Siamo</a></li>
@@ -202,31 +240,39 @@
         </nav>
     </header>
 
-    <!-- SEZIONE HERO / APERTURA A TUTTO SCHERMO -->
+    <!-- SEZIONE HERO -->
     <section id="home" class="hero">
         <h2>ACQUISTO DI METALLI FERROSI</h2>
         <a href="tel:3209594675" class="btn-verde">CONTATTACI</a>
     </section>
 
-    <!-- INCLUSIONE SEZIONE CHI SIAMO -->
+    <!-- SEZIONI -->
     {% include 'chi_siamo.html' %}
-
-    <!-- INCLUSIONE SEZIONE SERVIZI -->
     {% include 'servizi.html' %}
-
-    <!-- INCLUSIONE SEZIONE AUTORIZZAZIONI -->
     {% include 'autorizzazioni.html' %}
-
-    <!-- INCLUSIONE SEZIONE CONTATTI -->
     {% include 'contatti.html' %}
 
-    <!-- FOOTER -->
     <footer>
         <p>&copy; 2026 La Flaminia Recuperi S.r.l. - Tutti i diritti riservati.</p>
     </footer>
 
-    <!-- INCLUSIONE BANNER COOKIE E PRIVACY -->
     {% include 'cookie_banner.html' %}
 
+    <script>
+        // Script per attivare il menu hamburger su mobile
+        const toggleBtn = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+
+        toggleBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Chiudi il menu quando si clicca su un link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
