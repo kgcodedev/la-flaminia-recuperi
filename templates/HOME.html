@@ -159,7 +159,7 @@
             padding-bottom: 5px;
         }
 
-        /* CHI SIAMO RESPONSIVE (Immagine sotto su mobile, a destra su PC) */
+        /* CHI SIAMO RESPONSIVE */
         .chi-siamo-content {
             display: flex;
             flex-direction: column;
@@ -219,13 +219,6 @@
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #111;
-            color: #777;
-            font-size: 0.9rem;
-        }
     </style>
 </head>
 <body>
@@ -260,14 +253,13 @@
     {% include 'autorizzazioni.html' %}
     {% include 'contatti.html' %}
 
-    <footer>
-        <p>&copy; 2026 La Flaminia Recuperi S.r.l. - Tutti i diritti riservati.</p>
-    </footer>
+    <!-- FOOTER MODULARE -->
+    {% include 'footer.html' %}
 
     {% include 'cookie_banner.html' %}
 
     <script>
-        // Script per attivare il menu hamburger su mobile
+        // Script menu hamburger
         const toggleBtn = document.getElementById('menu-toggle');
         const mainNav = document.getElementById('main-nav');
 
@@ -275,7 +267,6 @@
             mainNav.classList.toggle('active');
         });
 
-        // Chiudi il menu quando si clicca su un link
         document.querySelectorAll('nav ul li a').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('active');
