@@ -1,0 +1,40 @@
+<!-- BANNER COOKIE E REGISTRAZIONE CONSENSO PRIVACY -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #141414; border-top: 2px solid #38B000; padding: 20px; z-index: 9999; display: none; box-shadow: 0 -5px 20px rgba(0,0,0,0.7);">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center;">
+        <p style="color: #ddd; font-size: 0.95rem; line-height: 1.5;">
+            Questo sito utilizza cookie tecnici per garantire il corretto funzionamento dei servizi. Cliccando su <strong>"Accetta"</strong>, acconsenti all'utilizzo dei cookie e alla memorizzazione telematica della prova di consenso (indirizzo IP, data e ora) a norma di legge.
+        </p>
+        <div>
+            <button id="accetta-cookie" class="btn-verde" style="padding: 10px 25px; font-size: 1rem; cursor: pointer; border: none;">Accetta e Continua</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (!localStorage.getItem('flaminia_cookie_accettato')) {
+            document.getElementById('cookie-banner').style.display = 'block';
+        }
+
+        document.getElementById('accetta-cookie').addEventListener('click', function() {
+            fetch('/api/consenso-privacy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    localStorage.setItem('flaminia_cookie_accettato', 'true');
+                    document.getElementById('cookie-banner').style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Errore di registrazione:', error);
+                localStorage.setItem('flaminia_cookie_accettato', 'true');
+                document.getElementById('cookie-banner').style.display = 'none';
+            });
+        });
+    });
+</script>
