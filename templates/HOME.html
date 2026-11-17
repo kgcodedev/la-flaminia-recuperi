@@ -159,6 +159,49 @@
             padding-bottom: 5px;
         }
 
+        /* CHI SIAMO RESPONSIVE (Immagine sotto su mobile, a destra su PC) */
+        .chi-siamo-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+            text-align: left;
+        }
+        .chi-siamo-testo {
+            color: #ddd;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .chi-siamo-testo p {
+            margin-bottom: 15px;
+        }
+        .chi-siamo-logo img {
+            max-width: 100%;
+            width: 280px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 2px solid #38B000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 176, 0, 0.4);
+        }
+
+        @media (min-width: 768px) {
+            .chi-siamo-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 50px;
+            }
+            .chi-siamo-testo {
+                flex: 1;
+            }
+            .chi-siamo-logo {
+                flex: 0 0 320px;
+                text-align: center;
+            }
+        }
+
         .servizi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
