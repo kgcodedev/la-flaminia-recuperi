@@ -159,50 +159,6 @@
             padding-bottom: 5px;
         }
 
-        /* CHI SIAMO: AFFIANCATO ANCHE SU SCHERMI PICCOLI */
-        .chi-siamo-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 20px;
-            align-items: center;
-            margin-top: 20px;
-        }
-        @media (max-width: 600px) {
-            .chi-siamo-grid {
-                grid-template-columns: 1fr 1fr; /* Mantiene le 2 colonne affiancate */
-                gap: 15px;
-            }
-        }
-
-        .chi-siamo-testo p {
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-            color: #ddd;
-        }
-        @media (min-width: 768px) {
-            .chi-siamo-testo p {
-                font-size: 1.05rem;
-            }
-        }
-        
-        .chi-siamo-logo {
-            text-align: center;
-            padding: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .chi-siamo-logo img {
-            max-width: 100%;
-            width: 220px; /* Ridimensionato per essere proporzionato */
-            height: auto;
-            object-fit: contain;
-            border-radius: 10px;
-            border: 2px solid #38B000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8), 
-                        0 0 10px rgba(56, 176, 0, 0.3);
-        }
-
         .servizi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
